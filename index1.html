@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stella Dreams - Your Whimsical Bedtime Companion✨</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #2d1b69 0%,
+          #11052c 50%,
+          #0b0b2f 100%
+        );
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Aurora background animation */
+      .aurora {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(147, 112, 219, 0.1) 50%,
+          rgba(138, 43, 226, 0.05) 70%,
+          transparent 90%
+        );
+        animation: aurora 20s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      @keyframes aurora {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: translateX(-10%) rotate(0deg);
+        }
+        50% {
+          opacity: 0.6;
+          transform: translateX(10%) rotate(1deg);
+        }
+      }
+
+      /* Stars */
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        border-radius: 50%;
+        animation: twinkle 3s ease-in-out infinite;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+
+      /* Floating clouds */
+      .clouds {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      .cloud {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        animation: float 30s ease-in-out infinite;
+      }
+
+      .cloud::before,
+      .cloud::after {
+        content: "";
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateX(-100px) translateY(0px);
+        }
+        50% {
+          transform: translateX(100vw) translateY(-20px);
+        }
+      }
+
+      /* Main container */
+      .container {
+        position: relative;
+        z-index: 10;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+        color: #e6e6fa;
+      }
+
+      .title {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        background: linear-gradient(45deg, #dda0dd, #98fb98, #87ceeb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0%,
+        100% {
+          filter: brightness(1);
+        }
+        50% {
+          filter: brightness(1.3);
+        }
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.8;
+        margin-bottom: 20px;
+      }
+
+      /* Sleepy character */
+      .sleepy-character {
+        width: 80px;
+        height: 80px;
+        margin: 20px auto;
+        position: relative;
+        animation: breathe 4s ease-in-out infinite;
+      }
+
+      @keyframes breathe {
+        0%,
+        100% {
+          transform: scale(1) rotate(0deg);
+        }
+        50% {
+          transform: scale(1.05) rotate(1deg);
+        }
+      }
+
+      .character-fox {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #ff7f50, #ff6347);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        position: relative;
+      }
+
+      .character-fox::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 15px;
+        width: 15px;
+        height: 25px;
+        background: linear-gradient(45deg, #ff7f50, #ff6347);
+        border-radius: 50% 50% 0 0;
+        transform: rotate(-20deg);
+      }
+
+      .character-fox::after {
+        content: "";
+        position: absolute;
+        top: -10px;
+        right: 15px;
+        width: 15px;
+        height: 25px;
+        background: linear-gradient(45deg, #ff7f50, #ff6347);
+        border-radius: 50% 50% 0 0;
+        transform: rotate(20deg);
+      }
+
+      .fox-eyes {
+        position: absolute;
+        top: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 8px;
+        background: #2d1b69;
+        border-radius: 50%;
+        animation: blink 5s ease-in-out infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        95%,
+        100% {
+          height: 8px;
+        }
+        97.5% {
+          height: 2px;
+        }
+      }
+
+      /* Dream calculator */
+      .dream-calculator {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px;
+        margin: 30px 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 500px;
+        transition: all 0.3s ease;
+      }
+
+      .dream-calculator:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(138, 43, 226, 0.2);
+      }
+
+      .input-group {
+        margin-bottom: 30px;
+      }
+
+      .label {
+        display: block;
+        color: #dda0dd;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+
+      .time-input,
+      .sleep-duration {
+        width: 100%;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        color: #e6e6fa;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+      }
+
+      .time-input:focus,
+      .sleep-duration:focus {
+        outline: none;
+        border-color: #98fb98;
+        box-shadow: 0 0 20px rgba(152, 251, 152, 0.3);
+        transform: scale(1.02);
+      }
+
+      /* Sleep duration slider */
+      .sleep-slider-container {
+        position: relative;
+        margin: 20px 0;
+      }
+
+      .sleep-slider {
+        width: 100%;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        outline: none;
+        -webkit-appearance: none;
+      }
+
+      .sleep-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 25px;
+        height: 25px;
+        background: linear-gradient(45deg, #98fb98, #87ceeb);
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 15px rgba(152, 251, 152, 0.5);
+        transition: all 0.3s ease;
+      }
+
+      .sleep-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+        box-shadow: 0 0 25px rgba(152, 251, 152, 0.8);
+      }
+
+      .sheep-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        height: 30px;
+      }
+
+      .sheep {
+        width: 25px;
+        height: 25px;
+        background: #f5f5dc;
+        border-radius: 50%;
+        position: relative;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.5s ease;
+      }
+
+      .sheep.active {
+        transform: translateY(0);
+        opacity: 1;
+        animation: sheepJump 0.6s ease-out;
+      }
+
+      @keyframes sheepJump {
+        0% {
+          transform: translateY(20px) scale(0.8);
+        }
+        50% {
+          transform: translateY(-10px) scale(1.1);
+        }
+        100% {
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .sheep::before {
+        content: "z";
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #98fb98;
+        font-size: 12px;
+        opacity: 0;
+        animation: zzzFloat 2s ease-in-out infinite 1s;
+      }
+
+      @keyframes zzzFloat {
+        0% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(-10px);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-20px);
+        }
+      }
+
+      /* Calculate button */
+      .calculate-btn {
+        width: 100%;
+        padding: 20px;
+        background: linear-gradient(45deg, #9370db, #8a2be2);
+        border: none;
+        border-radius: 15px;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .calculate-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(147, 112, 219, 0.4);
+      }
+
+      .calculate-btn:active {
+        transform: translateY(0);
+      }
+
+      .calculate-btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .calculate-btn:active::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      /* Results */
+      .results {
+        margin-top: 30px;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+      }
+
+      .results.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .bedtime-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .bedtime-option {
+        background: rgba(152, 251, 152, 0.2);
+        padding: 15px 25px;
+        border-radius: 15px;
+        border: 2px solid rgba(152, 251, 152, 0.3);
+        color: #98fb98;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .bedtime-option:hover {
+        background: rgba(152, 251, 152, 0.3);
+        transform: scale(1.05);
+        box-shadow: 0 5px 20px rgba(152, 251, 152, 0.3);
+      }
+
+      .bedtime-option.selected {
+        background: rgba(152, 251, 152, 0.4);
+        border-color: #98fb98;
+      }
+
+      /* Countdown timer */
+      .countdown-container {
+        margin-top: 40px;
+        text-align: center;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.5s ease;
+      }
+
+      .countdown-container.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .moon-timer {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 20px;
+        position: relative;
+        background: linear-gradient(135deg, #f0e68c, #ffd700);
+        border-radius: 50%;
+        box-shadow: 0 0 30px rgba(240, 230, 140, 0.5);
+        animation: moonGlow 3s ease-in-out infinite;
+      }
+
+      @keyframes moonGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 30px rgba(240, 230, 140, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 50px rgba(240, 230, 140, 0.8);
+        }
+      }
+
+      .moon-timer::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        background: radial-gradient(
+          circle at 30% 30%,
+          rgba(255, 255, 255, 0.3),
+          transparent 50%
+        );
+        border-radius: 50%;
+      }
+
+      .countdown-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #2d1b69;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .countdown-message {
+        color: #dda0dd;
+        font-size: 1.1rem;
+        margin-top: 10px;
+      }
+
+      /* Notification styles */
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(152, 251, 152, 0.9);
+        color: #2d1b69;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transform: translateX(400px);
+        transition: all 0.5s ease;
+        z-index: 1000;
+        max-width: 300px;
+      }
+
+      .notification.show {
+        transform: translateX(0);
+      }
+
+      .notification-close {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #2d1b69;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .title {
+          font-size: 2rem;
+        }
+
+        .dream-calculator {
+          padding: 20px;
+          margin: 20px 10px;
+        }
+
+        .bedtime-options {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .bedtime-option {
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Aurora background -->
+    <div class="aurora"></div>
+
+    <!-- Stars -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Clouds -->
+    <div class="clouds" id="clouds"></div>
+
+    <div class="container">
+      <header class="header">
+        <h1 class="title">Stella Dreams</h1>
+        <p class="subtitle">Your Whimsical Bedtime Companion</p>
+
+        <div class="sleepy-character">
+          <div class="character-fox">
+            <div class="fox-eyes"></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dream-calculator">
+        <div class="input-group">
+          <label class="label" for="wakeTime"
+            >🌅 When do you want to wake up Stella?</label
+          >
+          <input type="time" id="wakeTime" class="time-input" value="07:00" />
+        </div>
+
+        <div class="input-group">
+          <label class="label" for="sleepDuration"
+            >💤 How many hours of sleep? (<span id="hoursDisplay">7.5</span>
+            hours)</label
+          >
+          <div class="sleep-slider-container">
+            <input
+              type="range"
+              id="sleepDuration"
+              class="sleep-slider"
+              min="6"
+              max="10"
+              step="0.5"
+              value="7.5"
+            />
+            <div class="sheep-container" id="sheepContainer">
+              <!-- Sheep will be generated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <button class="calculate-btn" id="calculateBtn">
+          ✨ Weave My Dream Schedule
+        </button>
+      </div>
+
+      <div class="results" id="results">
+        <h3 style="color: #dda0dd; margin-bottom: 20px">
+          🌙 Your Magical Bedtime Options
+        </h3>
+        <div class="bedtime-options" id="bedtimeOptions">
+          <!-- Options will be generated by JavaScript -->
+        </div>
+      </div>
+
+      <div class="countdown-container" id="countdownContainer">
+        <div class="moon-timer">
+          <div class="countdown-text" id="countdownText">--:--:--</div>
+        </div>
+        <div class="countdown-message" id="countdownMessage">
+          Sweet dreams await or not...
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+      <button class="notification-close" onclick="closeNotification()">
+        ×
+      </button>
+      <div id="notificationText"></div>
+    </div>
+
+    <script>
+      // Global variables
+      let countdownInterval;
+      let selectedBedtime;
+      let notificationTimeout;
+
+      // Initialize the app
+      document.addEventListener("DOMContentLoaded", function () {
+        createStars();
+        createClouds();
+        updateSheep();
+
+        // Event listeners
+        document
+          .getElementById("sleepDuration")
+          .addEventListener("input", updateSheep);
+        document
+          .getElementById("calculateBtn")
+          .addEventListener("click", calculateBedtimes);
+      });
+
+      // Create twinkling stars
+      function createStars() {
+        const starsContainer = document.getElementById("stars");
+        const numStars = 50;
+
+        for (let i = 0; i < numStars; i++) {
+          const star = document.createElement("div");
+          star.className = "star";
+          star.style.left = Math.random() * 100 + "%";
+          star.style.top = Math.random() * 100 + "%";
+          star.style.animationDelay = Math.random() * 3 + "s";
+          starsContainer.appendChild(star);
+        }
+      }
+
+      // Create floating clouds
+      function createClouds() {
+        const cloudsContainer = document.getElementById("clouds");
+        const numClouds = 5;
+
+        for (let i = 0; i < numClouds; i++) {
+          const cloud = document.createElement("div");
+          cloud.className = "cloud";
+
+          const size = 60 + Math.random() * 40;
+          cloud.style.width = size + "px";
+          cloud.style.height = size * 0.6 + "px";
+          cloud.style.top = Math.random() * 50 + "%";
+          cloud.style.animationDelay = Math.random() * 30 + "s";
+          cloud.style.animationDuration = 25 + Math.random() * 10 + "s";
+
+          // Create cloud parts
+          cloud.style.setProperty("--before-width", size * 0.5 + "px");
+          cloud.style.setProperty("--before-height", size * 0.5 + "px");
+          cloud.style.setProperty("--after-width", size * 0.3 + "px");
+          cloud.style.setProperty("--after-height", size * 0.3 + "px");
+
+          cloudsContainer.appendChild(cloud);
+        }
+      }
+
+      // Update sheep based on sleep duration
+      function updateSheep() {
+        const duration = parseFloat(
+          document.getElementById("sleepDuration").value
+        );
+        const hoursDisplay = document.getElementById("hoursDisplay");
+        const sheepContainer = document.getElementById("sheepContainer");
+
+        hoursDisplay.textContent = duration;
+
+        // Clear existing sheep
+        sheepContainer.innerHTML = "";
+
+        // Calculate number of sleep cycles (1.5 hours each)
+        const cycles = Math.floor(duration / 1.5);
+
+        // Create sheep for each cycle
+        for (let i = 0; i < 6; i++) {
+          const sheep = document.createElement("div");
+          sheep.className = "sheep";
+
+          if (i < cycles) {
+            setTimeout(() => {
+              sheep.classList.add("active");
+            }, i * 200);
+          }
+
+          sheepContainer.appendChild(sheep);
+        }
+      }
+
+      // Calculate bedtime options
+      function calculateBedtimes() {
+        const wakeTimeInput = document.getElementById("wakeTime").value;
+        const sleepDuration = parseFloat(
+          document.getElementById("sleepDuration").value
+        );
+
+        if (!wakeTimeInput) {
+          showNotification("Please select a wake-up time! 🌅");
+          return;
+        }
+
+        const [hours, minutes] = wakeTimeInput.split(":").map(Number);
+        const wakeTime = new Date();
+        wakeTime.setHours(hours, minutes, 0, 0);
+
+        // If wake time is early morning, assume it's tomorrow
+        if (hours < 12) {
+          wakeTime.setDate(wakeTime.getDate() + 1);
+        }
+
+        const bedtimeOptions = [];
+
+        // Generate 3 options based on sleep cycles
+        for (let cycles = 4; cycles <= 6; cycles++) {
+          const sleepTime = cycles * 1.5; // 1.5 hours per cycle
+          const bedtime = new Date(
+            wakeTime.getTime() - sleepTime * 60 * 60 * 1000
+          );
+
+          const timeString = bedtime.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true,
+          });
+
+          bedtimeOptions.push({
+            time: timeString,
+            cycles: cycles,
+            sleepTime: sleepTime,
+            timestamp: bedtime.getTime(),
+          });
+        }
+
+        displayBedtimeOptions(bedtimeOptions);
+      }
+
+      // Display bedtime options
+      function displayBedtimeOptions(options) {
+        const resultsDiv = document.getElementById("results");
+        const optionsContainer = document.getElementById("bedtimeOptions");
+
+        optionsContainer.innerHTML = "";
+
+        options.forEach((option, index) => {
+          const optionDiv = document.createElement("div");
+          optionDiv.className = "bedtime-option";
+          optionDiv.innerHTML = `
+                    <div>${option.time}</div>
+                    <div style="font-size: 0.8rem; opacity: 0.8;">${option.cycles} cycles (${option.sleepTime}h)</div>
+                `;
+
+          optionDiv.addEventListener("click", () =>
+            selectBedtime(option, optionDiv)
+          );
+          optionsContainer.appendChild(optionDiv);
+        });
+
+        resultsDiv.classList.add("show");
+      }
+
+      // Select a bedtime and start countdown
+      function selectBedtime(option, element) {
+        // Remove previous selection
+        document.querySelectorAll(".bedtime-option").forEach((el) => {
+          el.classList.remove("selected");
+        });
+
+        // Add selection to clicked element
+        element.classList.add("selected");
+
+        selectedBedtime = option;
+        startCountdown(option.timestamp);
+
+        showNotification(`Perfect! Your bedtime is set for ${option.time} ✨`);
+      }
+
+      // Start countdown timer
+      function startCountdown(bedtimeTimestamp) {
+        const countdownContainer =
+          document.getElementById("countdownContainer");
+        const countdownText = document.getElementById("countdownText");
+        const countdownMessage = document.getElementById("countdownMessage");
+
+        countdownContainer.classList.add("show");
+
+        // Clear existing interval
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+        }
+
+        countdownInterval = setInterval(() => {
+          const now = new Date().getTime();
+          const timeLeft = bedtimeTimestamp - now;
+
+          if (timeLeft <= 0) {
+            countdownText.textContent = "Bedtime!";
+            countdownMessage.textContent = "Sweet dreams! 🌙✨";
+            showNotification(
+              "It's bedtime! Time to drift off to dreamland... 🌙💤",
+              5000
+            );
+            clearInterval(countdownInterval);
+            return;
+          }
+
+          const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+          const minutes = Math.floor(
+            (timeLeft % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+          countdownText.textContent = `${hours
+            .toString()
+            .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
+            .toString()
+            .padStart(2, "0")}`;
+
+          // Update message based on time left
+          if (timeLeft <= 30 * 60 * 1000) {
+            // 30 minutes
+            countdownMessage.textContent = "Time to start winding down! 🕯️";
+            if (timeLeft <= 30 * 60 * 1000 && timeLeft > 29 * 60 * 1000) {
+              showNotification(
+                "Time to wind down! Your dream awaits in 30 minutes 🌙",
+                4000
+              );
+            }
+          } else if (timeLeft <= 60 * 60 * 1000) {
+            // 1 hour
+            countdownMessage.textContent =
+              "Almost bedtime... prepare for sweet dreams! 🌟";
+          } else {
+            countdownMessage.textContent = "Sweet dreams await... ✨";
+          }
+        }, 1000);
+      }
+
+      // Show notification
+      function showNotification(message, duration = 3000) {
+        const notification = document.getElementById("notification");
+        const notificationText = document.getElementById("notificationText");
+
+        notificationText.textContent = message;
+        notification.classList.add("show");
+
+        // Clear existing timeout
+        if (notificationTimeout) {
+          clearTimeout(notificationTimeout);
+        }
+
+        notificationTimeout = setTimeout(() => {
+          closeNotification();
+        }, duration);
+      }
+
+      // Close notification
+      function closeNotification() {
+        const notification = document.getElementById("notification");
+        notification.classList.remove("show");
+
+        if (notificationTimeout) {
+          clearTimeout(notificationTimeout);
+        }
+      }
+
+      // Request notification permission
+      if ("Notification" in window && Notification.permission === "default") {
+        Notification.requestPermission();
+      }
+    </script>
+  </body>
+</html>
